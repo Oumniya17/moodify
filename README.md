@@ -234,7 +234,7 @@ Las APIs se integran directamente en la experiencia del usuario:
 * Generación automática de películas según el mood
 * Visualización de resultados en grid dinámico
 * Apertura de detalles en modal
-* 📝 Visualización de descripción de la película
+* 📝 Visualización de descripción breve de la película
 
 >Vibes no recomienda… **siente contigo**.
 
