@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resultado - Moodify</title>
+
+  <!-- TIPOGRAFIA -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #0d0d0d;
+      color: white;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .logo .m {
+      color: #e50914;
+    }
+
+    .menu a {
+      color: #aaa;
+      margin-left: 25px;
+      text-decoration: none;
+      transition: 0.3s;
+      font-size: 0.95rem;
+    }
+
+    .menu a:hover {
+      color: white;
+    }
+
+    /* HERO */
+    .hero {
+      padding-top: 120px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.1rem;
+      font-weight: 600;
+      text-shadow:
+        0 0 10px rgba(255,255,255,0.1),
+        0 0 25px rgba(229,9,20,0.25);
+    }
+
+    .meta {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    .meta span {
+      margin: 0 8px;
+    }
+
+    /* MOVIE CARD */
+    .movie-card {
+      margin: 40px auto;
+      width: 90%;
+      max-width: 900px;
+      background: #141414;
+      border-radius: 18px;
+      overflow: hidden;
+
+      box-shadow:
+        0 0 50px rgba(0,0,0,0.8),
+        0 0 25px rgba(229,9,20,0.2);
+    }
+
+    .movie-hero {
+      height: 400px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, #141414, transparent);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px;
+    }
+
+    .overlay h2 {
+      font-size: 1.9rem;
+      font-weight: 600;
+    }
+
+    .overlay p {
+      margin-top: 10px;
+      color: #ccc;
+      max-width: 600px;
+      font-size: 0.9rem;
+    }
+
+    /* INFO BLOQUES */
+    .extra {
+      padding: 25px 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    /* INFO CARD */
+    .info-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      background: rgba(255,255,255,0.04);
+      padding: 14px 18px;
+      border-radius: 14px;
+
+      backdrop-filter: blur(12px);
+      transition: 0.3s;
+      overflow: hidden;
+    }
+
+    .info-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 60%);
+      opacity: 0.5;
+    }
+
+    .info-card .icon {
+      font-size: 1.6rem;
+      filter: drop-shadow(0 0 6px rgba(255,255,255,0.4));
+    }
+
+    .info-card strong {
+      font-size: 0.75rem;
+      color: #aaa;
+    }
+
+    .info-card p {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .info-card:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow:
+        0 0 15px rgba(255,255,255,0.15),
+        0 0 30px rgba(229,9,20,0.15);
+    }
+
+    .info-card:hover .icon {
+      filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));
+    }
+
+    /* FOOD CARD */
+    .food-card {
+      position: relative;
+      flex: 1;
+      min-width: 220px;
+
+      background: rgba(229,9,20,0.1);
+      border-radius: 16px;
+      padding: 20px;
+
+      overflow: hidden;
+      cursor: pointer;
+      transition: 0.35s;
+      backdrop-filter: blur(15px);
+    }
+
+    .food-glow {
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      background: radial-gradient(circle, rgba(229,9,20,0.3), transparent 60%);
+      animation: rotateGlow 6s linear infinite;
+    }
+
+    @keyframes rotateGlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .food-content {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .food-icon {
+      font-size: 2rem;
+      filter: drop-shadow(0 0 10px rgba(229,9,20,0.7));
+    }
+
+    .food-text h4 {
+      font-size: 0.8rem;
+      color: #bbb;
+    }
+
+    .food-text p {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .food-card:hover {
+      transform: scale(1.05);
+      box-shadow:
+        0 0 25px rgba(229,9,20,0.6),
+        0 0 60px rgba(229,9,20,0.3);
+    }
+
+    /* AUDIO */
+    .music {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    audio {
+      margin-top: 10px;
+      width: 260px;
+      filter: invert(1);
+    }
+
+    /* TEXTO IA */
+    .ai {
+      margin-top: 30px;
+      text-align: center;
+      color: #bbb;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    /* BOTÓN */
+    .btn-back {
+      margin: 40px auto;
+      display: block;
+      padding: 14px 25px;
+      background: linear-gradient(90deg, #e50914, #ff2a2a);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+
+      box-shadow:
+        0 0 15px rgba(229,9,20,0.5),
+        0 0 25px rgba(229,9,20,0.2);
+    }
+
+    .btn-back:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #e50914;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">
+    <a href="/"><span class="m">M</span>oodify</a>
+  </div>
+
+  <div class="menu">
+    <a href="/explore">Explorar</a>
+    <a href="/vibes">Vibes</a>
+    <a href="/docs">Cómo funciona</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>🎬 Tu noche perfecta</h1>
+
+  <div class="meta">
+    Mood: <%= mood %> <span>•</span>
+    Ciudad: <%= city %> <span>•</span>
+    Plan: <%= group %>
+  </div>
+</div>
+
+<!-- MOVIE -->
+<div class="movie-card">
+
+  <div class="movie-hero"
+       style="background-image:url('https://image.tmdb.org/t/p/original<%= movie.backdrop_path %>')">
+
+    <div class="overlay">
+      <h2><%= movie.title %></h2>
+      <p><%= movie.overview %></p>
+    </div>
+
+  </div>
+
+  <div class="extra">
+
+    <% if (weather && weather.temp) { %>
+      <div class="info-card">
+        <div class="icon">🌦</div>
+        <div>
+          <strong>Clima</strong>
+          <p><%= weather.temp %>°C · <%= weather.description %></p>
+        </div>
+      </div>
+    <% } %>
+
+    <div class="food-card">
+      <div class="food-glow"></div>
+      <div class="food-content">
+        <div class="food-icon">🍔</div>
+        <div class="food-text">
+          <h4>Snack ideal</h4>
+          <p><%= food %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="icon">🎧</div>
+      <div>
+        <strong>Música</strong>
+        <p><%= music.title %></p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- AUDIO -->
+<% if (music.preview) { %>
+<div class="music">
+  <audio controls>
+    <source src="<%= music.preview %>" type="audio/mpeg">
+  </audio>
+</div>
+<% } %>
+
+<!-- TEXTO IA -->
+<div class="ai">
+  💡 Hoy es una noche perfecta para disfrutar de una experiencia 
+  <%= mood %> con <%= group %>, mientras fuera hay 
+  <%= weather && weather.description ? weather.description : "un ambiente especial" %>.
+</div>
+
+<!-- BOTÓN -->
+<button class="btn-back" onclick="window.location.href='/'">
+  🔁 Crear otra noche
+</button>
+
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Moodify</title>
+
+  <!-- TIPOGRAFIA -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      color: white;
+      position: relative;
+
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.7), #0d0d0d 90%),
+        url("https://image.tmdb.org/t/p/original/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg");
+
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, #0d0d0d 20%, transparent 60%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .logo .m {
+      color: #e50914;
+      font-size: 2.2rem;
+    }
+
+    .menu a {
+      color: #aaa;
+      text-decoration: none;
+      margin-left: 25px;
+      transition: 0.3s;
+      font-weight: 400;
+    }
+
+    .menu a:hover {
+      color: white;
+    }
+
+    /* CONTENIDO */
+    .overlay {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    /* CARD */
+    .form-box {
+      background: rgba(20, 20, 20, 0.6);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 40px;
+      width: 320px;
+      text-align: center;
+
+      box-shadow:
+        0 0 60px rgba(0,0,0,0.9),
+        0 0 20px rgba(229,9,20,0.2);
+
+      animation: fadeInUp 0.8s ease;
+      transition: 0.3s;
+
+      pointer-events: auto;
+    }
+
+    .form-box:hover {
+      transform: translateY(-5px);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* TITULOS */
+    .title {
+      font-size: 1.9rem;
+      font-weight: 600;
+
+      text-shadow:
+        0 0 8px rgba(255,255,255,0.08),
+        0 0 15px rgba(229,9,20,0.2);
+    }
+
+    .subtitle {
+      color: #aaa;
+      margin-top: 8px;
+      margin-bottom: 20px;
+      font-weight: 300;
+      font-size: 0.9rem;
+    }
+
+    h3 {
+      margin-top: 15px;
+      font-size: 0.85rem;
+      color: #ccc;
+      font-weight: 400;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border-radius: 8px;
+      border: none;
+      background: #2a2a2a;
+      color: white;
+      font-size: 0.9rem;
+    }
+
+    select:focus, input:focus {
+      outline: none;
+      box-shadow: 0 0 10px #e50914;
+    }
+
+    /* BOTÓN */
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(90deg, #e50914, #ff2a2a);
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+
+      box-shadow:
+        0 0 15px rgba(229,9,20,0.5),
+        0 0 25px rgba(229,9,20,0.2);
+
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow:
+        0 0 25px #e50914,
+        0 0 40px rgba(229,9,20,0.4);
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+
+  <div class="logo">
+    <a href="/"><span class="m">M</span>oodify</a>
+  </div>
+
+  <div class="menu">
+    <a href="/explore">Explorar</a>
+    <a href="/vibes">Vibes</a>
+    <a href="/docs">Cómo funciona</a>
+  </div>
+
+</div>
+
+<!-- CONTENIDO -->
+<div class="overlay">
+
+  <div class="form-box">
+
+    <div class="title">Tu noche perfecta</div>
+    <div class="subtitle">Generada como Netflix 🎬</div>
+
+    <form method="POST" action="/generate">
+
+      <h3>¿Cómo te sientes?</h3>
+      <select name="mood">
+        <option value="feliz">😄 Feliz</option>
+        <option value="triste">😢 Triste</option>
+        <option value="emocionado">🤩 Emocionado</option>
+        <option value="relajado">😴 Relax</option>
+      </select>
+
+      <h3>¿Dónde estás?</h3>
+      <input type="text" name="city" placeholder="Ej: Madrid" required>
+
+      <h3>¿Con quién?</h3>
+      <select name="group">
+        <option value="solo">🧍 Solo</option>
+        <option value="pareja">❤️ Pareja</option>
+        <option value="amigos">👯 Amigos</option>
+      </select>
+
+      <button type="submit">Crear mi noche 🍿</button>
+
+    </form>
+
+  </div>
+
+</div>
+
+</body>
+</html>

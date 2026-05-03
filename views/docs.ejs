@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cómo funciona - Moodify</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #111, #0d0d0d);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .logo .m {
+      color: #e50914;
+      font-size: 2.2rem;
+    }
+
+    .menu a {
+      color: #aaa;
+      text-decoration: none;
+      margin-left: 25px;
+      transition: 0.3s;
+    }
+
+    .menu a:hover {
+      color: white;
+    }
+
+    .menu .active {
+      color: white;
+      font-weight: 600;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 150px 50px 80px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      background: linear-gradient(90deg, #fff, #e50914);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 20px rgba(229,9,20,0.4);
+    }
+
+    .hero p {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 0.95rem;
+    }
+
+    /* FLOW */
+    .flow {
+      padding: 40px 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      position: relative;
+    }
+
+    /* LINEA CENTRAL */
+    .flow::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, #e50914, transparent);
+      opacity: 0.3;
+      z-index: 0;
+    }
+
+    /* STEP */
+    .step {
+      width: 45%;
+      padding: 25px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(20px);
+      position: relative;
+      z-index: 2;
+
+      box-shadow:
+        0 0 30px rgba(0,0,0,0.6),
+        0 0 10px rgba(229,9,20,0.15);
+
+      transition: 0.4s;
+    }
+
+    .step:hover {
+      transform: scale(1.04);
+      box-shadow:
+        0 0 25px rgba(229,9,20,0.6),
+        0 0 60px rgba(229,9,20,0.3);
+    }
+
+    .left { align-self: flex-start; }
+    .right { align-self: flex-end; }
+
+    .step h3 {
+      font-size: 1.2rem;
+    }
+
+    .step p {
+      margin-top: 8px;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    /* APIS */
+    .apis {
+      padding: 80px 50px;
+      text-align: center;
+    }
+
+    .apis h2 {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+    }
+
+    .api-grid {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .api {
+      width: 200px;
+      padding: 25px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(10px);
+
+      transition: 0.3s;
+
+      box-shadow:
+        0 0 20px rgba(0,0,0,0.5),
+        0 0 10px rgba(229,9,20,0.1);
+    }
+
+    .api:hover {
+      transform: translateY(-6px) scale(1.05);
+      box-shadow:
+        0 0 25px rgba(229,9,20,0.6),
+        0 0 50px rgba(229,9,20,0.2);
+    }
+
+    .api h4 {
+      margin-top: 10px;
+    }
+
+    .api p {
+      color: #aaa;
+      font-size: 0.85rem;
+      margin-top: 6px;
+    }
+
+    /* FOOT */
+    .foot {
+      text-align: center;
+      padding: 40px;
+      color: #888;
+      font-size: 0.85rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+
+      .flow::before {
+        display: none;
+      }
+
+      .step {
+        width: 100%;
+        align-self: center;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">
+    <a href="/"><span class="m">M</span>oodify</a>
+  </div>
+
+  <div class="menu">
+    <a href="/explore">Explorar</a>
+    <a href="/vibes">Vibes</a>
+    <a href="/docs" class="active">Cómo funciona</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Moodify</h1>
+  <p>Transformando emociones en experiencias reales</p>
+</div>
+
+<!-- FLOW -->
+<div class="flow">
+
+  <div class="step left">
+    <h3>Input del usuario</h3>
+    <p>El usuario introduce mood, ciudad y compañía.</p>
+  </div>
+
+  <div class="step right">
+    <h3>Procesamiento</h3>
+    <p>El backend analiza el mood y aplica lógica emocional.</p>
+  </div>
+
+  <div class="step left">
+    <h3>Consulta de APIs</h3>
+    <p>Se obtienen datos de películas, clima, música y comida.</p>
+  </div>
+
+  <div class="step right">
+    <h3>Optimización</h3>
+    <p>Se usa caché para mejorar rendimiento.</p>
+  </div>
+
+  <div class="step left">
+    <h3>Render final</h3>
+    <p>Se genera una experiencia personalizada.</p>
+  </div>
+
+</div>
+
+<!-- APIS -->
+<div class="apis">
+
+  <h2>⚙️ Motor de APIs</h2>
+
+  <div class="api-grid">
+
+    <div class="api">
+      🎬
+      <h4>TMDB</h4>
+      <p>Películas según mood</p>
+    </div>
+
+    <div class="api">
+      🌦
+      <h4>Weather</h4>
+      <p>Clima en tiempo real</p>
+    </div>
+
+    <div class="api">
+      🎧
+      <h4>Deezer</h4>
+      <p>Música adaptada</p>
+    </div>
+
+    <div class="api">
+      🍔
+      <h4>MealDB</h4>
+      <p>Snack ideal</p>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="foot">
+  Sistema basado en APIs + lógica emocional + caché inteligente
+</div>
+
+</body>
+</html>

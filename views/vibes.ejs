@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vibes - Moodify</title>
+
+  <!-- TIPOGRAFIA -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #0d0d0d;
+      color: white;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .logo .m {
+      color: #e50914;
+      font-size: 2.2rem;
+    }
+
+    .menu a {
+      color: #aaa;
+      text-decoration: none;
+      margin-left: 25px;
+      transition: 0.3s;
+    }
+
+    .menu a:hover {
+      color: white;
+    }
+
+    .menu .active {
+      color: white;
+      font-weight: 600;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 110px 50px 30px;
+    }
+
+    .main-title {
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+
+      text-shadow:
+        0 0 8px rgba(255,255,255,0.08),
+        0 0 15px rgba(229,9,20,0.2);
+    }
+
+    .hero p {
+      color: #aaa;
+      margin-top: 10px;
+      font-weight: 300;
+    }
+
+    /* VIBES */
+    .vibes {
+      display: flex;
+      gap: 25px;
+      padding: 20px 50px;
+      flex-wrap: wrap;
+    }
+
+    .vibe-card {
+      background: rgba(255,255,255,0.04);
+      padding: 25px;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: 0.35s;
+      backdrop-filter: blur(20px);
+      width: 220px;
+
+      border: 1px solid rgba(255,255,255,0.05);
+
+      box-shadow:
+        0 0 30px rgba(0,0,0,0.6),
+        0 0 15px rgba(229,9,20,0.15);
+    }
+
+    .vibe-card:hover {
+      transform: translateY(-8px) scale(1.05);
+      background: rgba(229,9,20,0.15);
+      box-shadow:
+        0 0 25px rgba(229,9,20,0.5),
+        0 0 60px rgba(229,9,20,0.2);
+    }
+
+    .active-vibe {
+      background: rgba(229,9,20,0.25) !important;
+      box-shadow:
+        0 0 25px #e50914,
+        0 0 60px rgba(229,9,20,0.3);
+    }
+
+    .vibe-title {
+      font-size: 1.05rem;
+      margin-top: 10px;
+    }
+
+    /* SECTION TITLE */
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-top: 20px;
+
+      text-shadow:
+        0 0 8px rgba(255,255,255,0.05),
+        0 0 15px rgba(229,9,20,0.15);
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 25px;
+      padding: 20px 50px 80px;
+    }
+
+    .movie {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .movie img {
+      width: 100%;
+      border-radius: 12px;
+      transition: 0.4s;
+    }
+
+    .movie:hover img {
+      transform: scale(1.12);
+    }
+
+    /* OVERLAY */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 15px;
+      transition: 0.3s;
+    }
+
+    .movie:hover .overlay {
+      opacity: 1;
+    }
+
+    .overlay h3 {
+      font-size: 0.85rem;
+    }
+
+    .overlay p {
+      font-size: 0.75rem;
+      color: #ccc;
+    }
+
+    /* EMPTY */
+    .empty {
+      padding: 60px 50px;
+      color: #bbb;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      text-shadow:
+        0 0 10px rgba(255,255,255,0.05),
+        0 0 20px rgba(229,9,20,0.15);
+    }
+
+    /* MODAL */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .modal-content {
+      background: #141414;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 600px;
+    }
+
+    .close-btn {
+      margin-top: 20px;
+      padding: 12px 20px;
+      background: linear-gradient(90deg, #e50914, #ff2a2a);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+
+      box-shadow:
+        0 0 15px rgba(229,9,20,0.6),
+        0 0 25px rgba(229,9,20,0.3);
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">
+    <a href="/"><span class="m">M</span>oodify</a>
+  </div>
+
+  <div class="menu">
+    <a href="/explore">Explorar</a>
+    <a href="/vibes" class="active">Vibes</a>
+    <a href="/docs">Cómo funciona</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1 class="main-title">🎧 Mejora tu vibe</h1>
+  <p>Elige lo que necesitas y deja que el cine haga el resto</p>
+</div>
+
+<!-- VIBES -->
+<div class="vibes">
+  <div class="vibe-card" data-type="animarme" onclick="go('animarme')">😢<div class="vibe-title">Necesito animarme</div></div>
+  <div class="vibe-card" data-type="energia" onclick="go('energia')">😄<div class="vibe-title">Quiero más energía</div></div>
+  <div class="vibe-card" data-type="chill" onclick="go('chill')">😴<div class="vibe-title">Modo chill</div></div>
+  <div class="vibe-card" data-type="adrenalina" onclick="go('adrenalina')">🤩<div class="vibe-title">Sube la adrenalina</div></div>
+</div>
+
+<!-- RESULTADOS -->
+<% if (typeof movies !== 'undefined') { %>
+
+  <div class="hero">
+    <h1 class="section-title">🔥 Recomendado para ti</h1>
+  </div>
+
+  <div class="grid">
+    <% movies.forEach(movie => { %>
+      <% if (movie.poster_path) { %>
+        <div class="movie" onclick="openMovie(<%= movie.id %>)">
+          <img src="https://image.tmdb.org/t/p/w500<%= movie.poster_path %>">
+          <div class="overlay">
+            <h3><%= movie.title %></h3>
+            <p>⭐ <%= movie.vote_average.toFixed(1) %></p>
+          </div>
+        </div>
+      <% } %>
+    <% }) %>
+  </div>
+
+<% } else { %>
+
+  <div class="empty">
+    Descubre películas que encajan con tu momento...
+  </div>
+
+<% } %>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content" id="modal-content"></div>
+</div>
+
+<script>
+function go(type) {
+  window.location.href = "/vibes/" + type;
+}
+
+/* VIBE ACTIVO */
+const current = window.location.pathname.split("/").pop();
+document.querySelectorAll(".vibe-card").forEach(card => {
+  if (card.dataset.type === current) {
+    card.classList.add("active-vibe");
+  }
+});
+
+/* MODAL */
+async function openMovie(id) {
+  const res = await fetch(`/movie/${id}`);
+  const movie = await res.json();
+
+  document.getElementById("modal-content").innerHTML = `
+    <h2>${movie.title}</h2>
+    <p style="margin-top:10px;color:#ccc">${movie.overview}</p>
+    <p style="margin-top:10px">⭐ ${movie.vote_average.toFixed(1)}</p>
+    <button class="close-btn" onclick="closeModal()">Cerrar</button>
+  `;
+
+  document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+</script>
+
+</body>
+</html>
