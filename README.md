@@ -230,11 +230,11 @@ Las APIs se integran directamente en la experiencia del usuario:
 
 #### 🎬 Interacciones disponibles
 
-* Selección de estados emocionales
-* Generación automática de contenido
-* Grid dinámico de películas
-* Apertura de modales
-* ▶️ Reproducción de trailers
+* Selección de estados emocionales (vibes)
+* Generación automática de películas según el mood
+* Visualización de resultados en grid dinámico
+* Apertura de detalles en modal
+* 📝 Visualización de descripción de la película
 
 >Vibes no recomienda… **siente contigo**.
 
